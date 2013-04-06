@@ -1,43 +1,52 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    
-    <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 }
-      #map-canvas { height: 100% }
-    </style>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1CpD5ViAJZ33wh2Iobkx_Qnx4FmnwlyA&sensor=false">
-    </script>
-    <script type="text/javascript">
-	var address = "{{ stop.address }}, {{ stop.city }}, {{ stop.state }}, {{ stop.zip }}";
-    var geocoder, map;
-	function codeAddress(address) {
-	    geocoder = new google.maps.Geocoder();
-	    geocoder.geocode( { 'address': address}, function(results, status) {
-	      if (status == google.maps.GeocoderStatus.OK) {
-	        var myOptions = {
-	        zoom: 8,
-	        center: results[0].geometry.location,
-	        mapTypeId: google.maps.MapTypeId.ROADMAP
-	        }
-	        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+{% extends "base.html" %}
 
-	        var marker = new google.maps.Marker({
-	            map: map,
-	            position: results[0].geometry.location
-	        });
-	      }
-	    });
-	  }
-	
-	codeAddress(address);
-    </script>
-  </head>
+{% block css %}
 
-<body>
+{{ block.super }}
 
+
+<style type="text/css">
+   html { height: 100% }
+   body { height: 100%; margin: 0; padding: 0 }
+   #map_canvas { height: 50%; width:50%;float:left !important;  }
+ </style>
+
+{% endblock css %}
+{% block scripts %}
+{{ block.super }}
+<script type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1CpD5ViAJZ33wh2Iobkx_Qnx4FmnwlyA&sensor=false">
+</script>
+<script type="text/javascript">
+var address = "{{ stop.address }}, {{ stop.city }}, {{ stop.state }}, {{ stop.zip }}";
+var geocoder, map;
+function codeAddress(address) {
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var myOptions = {
+        zoom: 8,
+        center: results[0].geometry.location,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      }
+    });
+  }
+
+codeAddress(address);
+</script>
+
+{% endblock scripts %}
+
+{% block content %}
+
+<div style="float:left; width:100%;clear:both;">
 {{ truck.name }}<br /><br />
 {{ truck.description }}<br /><br />
 <a href="http://twitter.com/{{ truck.twitter }}">@{{ truck.twitter }}</a>
@@ -46,10 +55,12 @@
 {{ stop }}<br />
 {{ stop.address }}<br />
 {{ stop.city }}, {{ stop.state }} {{ stop.zip }}
-
+</div>
 <div id ="map_canvas">
 	
 </div><!-- end #map-canvas -->
 
-</body>
-</html>
+
+
+
+{% endblock content %}    

@@ -5,6 +5,13 @@ from truck.models import *
 
 truck_list = Truck.objects.all()
 
+def home(request):
+	"""docstring for home"""
+	return render_to_response("home.html", {
+		"trucks": truck_list,
+	
+	}, context_instance=RequestContext(request))
+
 def truckList(request):
 	"""docstring for truckList"""
 	return render_to_response("trucks/truck_list.html", {

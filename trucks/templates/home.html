@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block css %}
+
+{{ block.super }}
+
+
+<style type="text/css">
+   html { height: 100% }
+   body { height: 100%; margin: 0; padding: 0 }
+   #map_canvas { height: 50%; width:50%;float:left !important;  }
+ </style>
+
+{% endblock css %}
+
+
+{% block content %}
+
+<h1>Hello World</h1>
+
+<ul>
+	{% for truck in trucks %}
+
+	<li><a href="{{ truck.get_absolute_url }}">{{ truck.name }}</a> - {{ truck.description }}</li>
+
+	{% endfor %}
+</ul>
+{% endblock content %}
