@@ -25,6 +25,9 @@ class Stop(models.Model):
 	zip = models.CharField(blank=True, max_length=5)
 	city = models.CharField(max_length=500, blank=True)
 	state = models.CharField(max_length=500, blank=True)
+	geo = models.CharField(blank=True, max_length=200, help_text="Takes lat,long data. Leave blank to auto-fill on save.")
+	
+	
 	
 	arrival = models.DateTimeField(blank=True, default=datetime.datetime.now)
 	departure = models.DateTimeField(blank=True, default=datetime.datetime.now)

@@ -12,37 +12,38 @@
  </style>
 
 {% endblock css %}
-{% block scripts %}
+{% block top_script %}
 {{ block.super }}
 <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1CpD5ViAJZ33wh2Iobkx_Qnx4FmnwlyA&sensor=false">
 </script>
 <script type="text/javascript">
-var address = "{{ stop.address }}, {{ stop.city }}, {{ stop.state }}, {{ stop.zip }}";
-var geocoder, map;
-function codeAddress(address) {
-    geocoder = new google.maps.Geocoder();
-    geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        var myOptions = {
-        zoom: 8,
-        center: results[0].geometry.location,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+var map;
+var stopLatLng = new google.maps.LatLng({{ stop.geo }})
+ function initialize() {
+   var mapOptions = {
+     zoom: 12,
+     center: stopLatLng,
+     mapTypeId: google.maps.MapTypeId.ROADMAP
+   };
+   map = new google.maps.Map(document.getElementById('map_canvas'),
+       mapOptions);
 
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-        });
-      }
-    });
-  }
 
-codeAddress(address);
+	 var marker = new google.maps.Marker({
+	     position: stopLatLng,
+	     map: map,
+	     title:"{{ truck.name }} is currently here!"
+	 });
+
+ }
+
+ google.maps.event.addDomListener(window, 'load', initialize);
+
+
 </script>
 
-{% endblock scripts %}
+{% endblock top_script %}
 
 {% block content %}
 
