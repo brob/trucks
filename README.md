@@ -1,3 +1,3 @@
 trucks
 ======
-This is still in pre-alpha
+This is still a pre-alpha food truck tracker
