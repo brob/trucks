@@ -18,4 +18,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 	url(r'^trucks/$', truckList),
 	url(r'^trucks/(?P<slug>[-_\w]+)/$', truckDetail),
+	url(r'^contact/$', contactForm),
 )
