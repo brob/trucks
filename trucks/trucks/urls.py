@@ -19,4 +19,5 @@ urlpatterns = patterns('',
 	url(r'^trucks/$', truckList),
 	url(r'^trucks/(?P<slug>[-_\w]+)/$', truckDetail),
 	url(r'^contact/$', contactForm),
+	url(r'^thanks/$', TemplateView.as_view(template_name="thanks.html")),
 )
