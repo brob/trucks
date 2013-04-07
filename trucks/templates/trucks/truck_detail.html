@@ -53,14 +53,21 @@ var stopLatLng = new google.maps.LatLng({{ stop.geo }})
 <a href="http://twitter.com/{{ truck.twitter }}">@{{ truck.twitter }}</a>
 
 <h3>Next Stop</h3>
-{{ stop }}<br />
-{{ stop.address }}<br />
-{{ stop.city }}, {{ stop.state }} {{ stop.zip }}
-</div>
-<div id ="map_canvas">
-	
-</div><!-- end #map-canvas -->
 
+{% if stop %}
+	{{ stop }}<br />
+	{{ stop.address }}<br />
+	{{ stop.city }}, {{ stop.state }} {{ stop.zip }}
+	</div>
+	<div id ="map_canvas">
+	
+	</div><!-- end #map-canvas -->
+	
+{% else %}
+
+	<p>No stops planned yet!</p>
+	
+{% endif %}
 
 
 

@@ -13,6 +13,59 @@
 
 {% endblock css %}
 
+{% block top_script %}
+
+<script type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1CpD5ViAJZ33wh2Iobkx_Qnx4FmnwlyA&sensor=false">
+</script>
+<script type="text/javascript">
+var map;
+var markers = [
+{% for stop in stops %}
+    ['{{ stop.truck.name }}', {{ stop.geo }}]{% if not forloop.last %},{% endif %}
+{% endfor %}
+];
+
+
+function initializeMaps() {
+    var myOptions = {
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+	
+	map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+   var infowindow = new google.maps.InfoWindow();
+    var marker, i;
+    var bounds = new google.maps.LatLngBounds();
+    for (i = 0; i < markers.length; i++) {
+        var pos = new google.maps.LatLng(markers[i][1], markers[i][2]);
+        bounds.extend(pos);
+        marker = new google.maps.Marker({
+            position: pos,
+            map: map
+        });
+
+   	};
+	//IF THERE'S ONLY ONE POINT, ZOOM OUT
+	if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+		var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+		var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+		bounds.extend(extendPoint1);
+		bounds.extend(extendPoint2);
+	}
+	
+	(marker, i);
+    map.fitBounds(bounds);
+}
+
+
+google.maps.event.addDomListener(window, 'load', initializeMaps);
+
+</script>
+
+
+
+{% endblock top_script %}
+
 
 {% block content %}
 
@@ -25,4 +78,18 @@
 
 	{% endfor %}
 </ul>
+
+
+<h1>Where the trucks are right now</h1>
+{% if stops %}
+
+<div id ="map_canvas">
+	
+</div><!-- end #map-canvas -->
+
+{% else %}
+<p>Shhhh the trucks are sleeping!</p>
+{% endif %}
+
+
 {% endblock content %}

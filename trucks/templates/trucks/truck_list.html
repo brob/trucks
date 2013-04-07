@@ -1,5 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+
 {% for truck in trucks %}
 
 <a href="{{ truck.get_absolute_url }}">{{ truck.name }}</a> - {{ truck.description }}
 
 {% endfor %}
+
+{% endblock %}

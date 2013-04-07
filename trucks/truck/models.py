@@ -34,3 +34,6 @@ class Stop(models.Model):
 	
 	def __unicode__(self):
 			return u'%s %s' % (self.truck, self.arrival)
+
+	class Meta:
+		get_latest_by = "arrival"
