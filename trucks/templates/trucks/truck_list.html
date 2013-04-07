@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
+		<h1>A list of all food trucks in Memphis</h1>
+		<h3>If you don't see your favorite truck, be sure to <a href="/contact/" title="Let us know if we're missing your favorite Memphis food truck">contact us</a></h3>
+		
+		<ul>
+		{% for truck in trucks %}
 
-{% for truck in trucks %}
+		<li><a href="{{ truck.get_absolute_url }}">{{ truck.name }}</a> - {{ truck.description }}</li>
 
-<a href="{{ truck.get_absolute_url }}">{{ truck.name }}</a> - {{ truck.description }}
-
-{% endfor %}
-
+		{% endfor %}
+		</ul>
+	
 {% endblock %}

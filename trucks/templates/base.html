@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		
+		
+		<script type="text/javascript">
+					var jTrucksConf = {};
+					jTrucksConf.theme = {
+
+							mapStyle: [ { "stylers": [ { "gamma": 0.8 }, { "saturation": 30 }, { "lightness": -10 } ] } ],
+
+
+					};
+				</script>
+		
 	
-		{% block top_script %}{% endblock top_script %}
+		{% block top_script %}
+		
+		{% endblock top_script %}
 		
 		{% block css %}
+		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">	
 		
-		
+		<style type="text/css" media="screen">
+			#navSpacer {
+				margin-bottom:50px;
+				
+			}
+		</style>	
 		
 		
 		{% endblock css %}
@@ -17,7 +37,120 @@
 	
 	<body>
 	
-	{% block content %}{% endblock content %}
+
+	    <div class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="navbar-inner">
+	        <div class="container">
+	          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="brand" href="/" title="Memphis Four Wheel Food">Memphis Four Wheel Food</a>
+	          <div class="nav-collapse collapse">
+	            <ul class="nav">
+	              <li><a href="/trucks/" title="Listing of all food trucks">Food Trucks</a></li>
+	              <li><a href="/contact/" title="Contact Memphis Four Wheel Food">Contact</a></li>
+	            </ul>
+	          </div><!--/.nav-collapse -->
+	        </div>
+	      </div>
+	    </div>
+		
+		<div class ="row" id="navSpacer">
+			
+		</div><!-- end .row -->
+	
+	<div class ="row">
+		<div class ="container">
+			{% block content %}{% endblock content %}
+		</div>
+	</div>
+	{% block home_content %}{% endblock home_content %}
+	
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	
+	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="file:///Users/bryanrobinson/Documents/personal/trucks/static/js/jTrucks.js"></script>
+	
+	
+	
+	<script type="text/javascript" charset="utf-8">
+		var jTrucks = {
+
+			maps: {
+				initializeMaps: function(markers, styles) {
+					var markers = markers;
+					var stylesArray = styles;
+				    var myOptions = {
+						mapTypeId: google.maps.MapTypeId.ROADMAP,
+						styles: stylesArray,
+						zoomControl: true,
+						zoomControlOptions: {
+						  style: google.maps.ZoomControlStyle.SMALL
+						},
+						
+						scrollwheel: false,
+				    };
+
+					map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+				   var infowindow = new google.maps.InfoWindow();
+				    var marker, i;
+				    var bounds = new google.maps.LatLngBounds();
+				    for (i = 0; i < markers.length; i++) {
+				        var pos = new google.maps.LatLng(markers[i][1], markers[i][2]);
+				        bounds.extend(pos);
+				        marker = new google.maps.Marker({
+				            position: pos,
+				            map: map
+				        });
+
+				   	};
+					//IF THERE'S ONLY ONE POINT, ZOOM OUT
+					if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+						var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+						var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+						bounds.extend(extendPoint1);
+						bounds.extend(extendPoint2);
+					}
+
+					(marker, i);
+				    map.fitBounds(bounds);
+				}		
+
+			},
+
+
+
+			init: function() {
+				var self = this;
+			}
+		}
+
+		jTrucks.init();
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	{% block end_scripts %}{% endblock end_scripts %}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
