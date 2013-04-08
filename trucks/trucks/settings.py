@@ -99,6 +99,17 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+if os.getenv(RUN_ENV, '') == 'production':
+	STATIC_ROOT = '/home/bryanlrobinson/webapps/djangomedia/'
+	
+	# Additional locations of static files
+	STATICFILES_DIRS = (
+	    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+	    # Always use forward slashes, even on Windows.
+	    # Don't forget to use absolute paths, not relative paths.
+		'/'
+	)
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'x(4ph8)un3au+9x-v+&d7hnrv9(#i05_07_387m!ahn1vy_m%m'
 
