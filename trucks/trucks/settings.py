@@ -40,7 +40,7 @@ if os.getenv(RUN_ENV, '') == 'production':
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['beta.bryanlrobinson.com']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -83,7 +83,7 @@ STATIC_ROOT = 'http://media.bryanlrobinson.com/media/django-media/static'
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
-STATIC_URL = 'http://media.bryanlrobinson.com/media/django-media/static/'
+#STATIC_URL = 'http://media.bryanlrobinson.com/media/django-media/static/'
 if os.getenv(RUN_ENV, '') == 'production':
 	STATIC_URL = 'http://media.bryanlrobinson.com/media/django-media/static/'
 
