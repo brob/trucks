@@ -111,7 +111,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	'/Users/bryanrobinson/documents/personal/trucks/trucks/templates'
+	'/Users/bryanrobinson/documents/personal/trucks/trucks/templates',
+	'/home/bryanlrobinson/webapps/custom/trucks'
 )
 
 INSTALLED_APPS = (
@@ -128,6 +129,12 @@ INSTALLED_APPS = (
 	'truck',
 	'south',
 )
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'bryanlrobinson@gmail.com'
+EMAIL_HOST_PASSWORD = 'Endymion'
+EMAIL_PORT = 587
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

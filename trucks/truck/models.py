@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django import forms
 
 
 class Truck(models.Model):
@@ -37,3 +38,9 @@ class Stop(models.Model):
 
 	class Meta:
 		get_latest_by = "arrival"
+
+class Contact(forms.Form):
+	name = forms.CharField()
+	email = forms.EmailField()
+	message = forms.CharField()
+	

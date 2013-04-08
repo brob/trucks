@@ -8,67 +8,54 @@
 <style type="text/css">
    html { height: 100% }
    body { height: 100%; margin: 0; padding: 0 }
-   #map_canvas { height: 50%; width:50%;float:left !important;  }
+   #map_canvas { height: 250px; width:100%;}
+#map_row {padding-left:30px;}
  </style>
 
 {% endblock css %}
 
-{% block top_script %}
+{% block end_scripts %}
 
 <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1CpD5ViAJZ33wh2Iobkx_Qnx4FmnwlyA&sensor=false">
 </script>
 <script type="text/javascript">
-var map;
+var stylesArray = jTrucksConf.theme.mapStyle;
+
 var markers = [
+{% if stops %}
 {% for stop in stops %}
     ['{{ stop.truck.name }}', {{ stop.geo }}]{% if not forloop.last %},{% endif %}
 {% endfor %}
+{% else %}
+	['Shhhh the food trucks are sleeping!', 35.143524,-90.053973]
+{% endif %}
 ];
-
-
-function initializeMaps() {
-    var myOptions = {
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-	
-	map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
-   var infowindow = new google.maps.InfoWindow();
-    var marker, i;
-    var bounds = new google.maps.LatLngBounds();
-    for (i = 0; i < markers.length; i++) {
-        var pos = new google.maps.LatLng(markers[i][1], markers[i][2]);
-        bounds.extend(pos);
-        marker = new google.maps.Marker({
-            position: pos,
-            map: map
-        });
-
-   	};
-	//IF THERE'S ONLY ONE POINT, ZOOM OUT
-	if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-		var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-		var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-		bounds.extend(extendPoint1);
-		bounds.extend(extendPoint2);
-	}
-	
-	(marker, i);
-    map.fitBounds(bounds);
-}
-
-
-google.maps.event.addDomListener(window, 'load', initializeMaps);
+jTrucks.maps.initializeMaps(markers, stylesArray);
 
 </script>
 
 
 
-{% endblock top_script %}
+{% endblock end_scripts %}
+
+{% block home_content %}
 
 
-{% block content %}
+<div class ="row">
 
+<div class="container" id="hero">
+
+		<h1>Find food trucks when you're hungry</h1>
+		<p>All the Memphis food trucks in one convenient place so that you can find the best street food available!</p>
+
+</div> <!-- /container -->
+</div><!-- end .row -->
+
+
+{% comment %}
+<div class ="container">
+	
 <h1>Hello World</h1>
 
 <ul>
@@ -78,18 +65,52 @@ google.maps.event.addDomListener(window, 'load', initializeMaps);
 
 	{% endfor %}
 </ul>
+</div><!-- end .container -->
+{% endcomment %}
+<div class ="row" id="map_row">
 
-
-<h1>Where the trucks are right now</h1>
-{% if stops %}
-
-<div id ="map_canvas">
 	
-</div><!-- end #map-canvas -->
 
-{% else %}
-<p>Shhhh the trucks are sleeping!</p>
-{% endif %}
+		<div id ="map_canvas">
+	
+		</div><!-- end #map-canvas -->
 
 
-{% endblock content %}
+</div><!-- end .row-fluid row -->
+
+<div class ="row">
+	<div class ="container">
+		
+		<div class ="span4">
+			<h3>Food trucks</h3>
+			
+			<ul>
+				{% for truck in trucks %}
+
+				<li><a href="{{ truck.get_absolute_url }}">{{ truck.name }}</a> - {{ truck.description }}</li>
+
+				{% endfor %}
+			</ul>
+		</div><!-- end .span4 -->
+		
+		<div class ="span4">
+			<h3>Currently out</h3>
+			{% if stops %}
+			<ul>
+				{% for stop in stops %}
+					<li><a href="{{ stop.truck.get_absolute_url }}" title="{{ stop.truck }} is out and about">{{ stop.truck }}</a></li>
+					
+				{% endfor %}
+			</ul>
+			{% else %}
+			<p>Shhhhh the trucks are sleeping</p>
+			{% endif %}
+		</div><!-- end .span4 -->
+		
+		<div class ="span3">
+			<h3>About</h3>
+		</div><!-- end .span4 -->
+	</div><!-- end .container -->
+</div><!-- end .row -->
+
+{% endblock home_content %}

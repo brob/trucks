@@ -1,7 +1,9 @@
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, render
 from django.template import RequestContext
 from truck.models import *
+from django.core.context_processors import csrf
+from django.core.mail import send_mail
 
 
 def home(request):
@@ -41,3 +43,25 @@ def truckDetail(request, slug):
 		'truck' : truck,
 		'stop' : stop,
     }, context_instance=RequestContext(request))
+
+
+def contactForm(request):
+	if request.method == 'POST':
+		c = {}
+		c.update(csrf(request))
+		form = Contact(request.POST)
+		if form.is_valid():
+			message = form.cleaned_data['message']
+			fromEmail = form.cleaned_data['email']
+			send_mail('Email from Truck Form', message, fromEmail,
+			    ['bryanlrobinson@gmail.com'], fail_silently=False)
+			return HttpResponseRedirect('/thanks/')
+			
+	else:
+		c = {}
+		c.update(csrf(request))
+		form = Contact()
+	return render (request, 'contact.html', {
+		'form': form,
+		'c': c,
+	})
