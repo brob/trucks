@@ -112,7 +112,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 	'/Users/bryanrobinson/documents/personal/trucks/trucks/templates',
-	'/home/bryanlrobinson/webapps/custom/trucks'
+	'/home/bryanlrobinson/webapps/custom/trucks/templates'
 )
 
 INSTALLED_APPS = (
