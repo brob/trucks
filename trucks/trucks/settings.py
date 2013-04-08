@@ -4,8 +4,6 @@ import django
 RUN_ENV = 'DJANGO_RUN_ENV'
 
 DEBUG = True
-if os.getenv(RUN_ENV, '') == 'production':
-	DEBUG = True
 	
 TEMPLATE_DEBUG = DEBUG
 
