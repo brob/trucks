@@ -109,6 +109,7 @@ if os.getenv(RUN_ENV, '') == 'production':
 	    # Don't forget to use absolute paths, not relative paths.
 		'/'
 	)
+	STATIC_URL = "http://media.bryanlrobinson.com"
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'x(4ph8)un3au+9x-v+&d7hnrv9(#i05_07_387m!ahn1vy_m%m'
