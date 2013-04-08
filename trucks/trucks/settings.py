@@ -154,6 +154,14 @@ EMAIL_HOST_USER = 'bryanlrobinson@gmail.com'
 EMAIL_HOST_PASSWORD = 'Endymion'
 EMAIL_PORT = 587
 
+if os.getenv(RUN_ENV, '') == 'production':
+	EMAIL_HOST = 'smtp.webfaction.com'
+	EMAIL_HOST_USER = 'fourwheelfood'
+	EMAIL_HOST_PASSWORD = 'Asheron1'
+	DEFAULT_FROM_EMAIL = 'contact@bryanlrobinson.com'
+	SERVER_EMAIL = 'contact@bryanlrobinson.com'
+
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
