@@ -14,8 +14,7 @@
  </style>
 
 {% endblock css %}
-{% block top_script %}
-{{ block.super }}
+{% block end_scripts %}
 <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1CpD5ViAJZ33wh2Iobkx_Qnx4FmnwlyA&sensor=false">
 </script>
@@ -45,7 +44,7 @@ var stopLatLng = new google.maps.LatLng({{ stop.geo }})
 
 </script>
 
-{% endblock top_script %}
+{% endblock %}
 
 {% block content %}
 
@@ -56,7 +55,7 @@ var stopLatLng = new google.maps.LatLng({{ stop.geo }})
 <h3>Next Stop for {{ truck.name }}</h3>
 
 {% if stop %}
-	
+	<p>{{ stop.arrival|date:"l F d" }} from {{ stop.arrival|date:"P" }} until {{ stop.departure|date:"P" }}</p>
 	<p>{{ stop.address }}<br />
 	{{ stop.city }}, {{ stop.state }} {{ stop.zip }}</p>
 	</div>
