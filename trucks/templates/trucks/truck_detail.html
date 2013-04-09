@@ -47,11 +47,12 @@ var stopLatLng = new google.maps.LatLng({{ stop.geo }})
 {% endblock %}
 
 {% block content %}
-
+{% load cache %}
+{% cache 15 sidebar %}
 <h1>{{ truck.name }}</h1>
 <p>{{ truck.description }}</p>
 <p>On Twitter: <a href="http://twitter.com/{{ truck.twitter }}">@{{ truck.twitter }}</a></p>
-
+{% endcache %}
 <h3>Next Stop for {{ truck.name }}</h3>
 
 {% if stop %}
