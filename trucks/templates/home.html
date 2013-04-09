@@ -37,7 +37,7 @@ function initialize() {
 	var all = [
 	{% if stops %}
 		{% for stop in stops %}
-			["{{ stop.truck.name }}", "{{ stop.address }}", "{{ stop.city }}", "{{ stop.state }}", "{{ stop.zip }}", {{ stop.geo }}]{% if not forloop.last %}, {% endif %}
+			["{{ stop.truck.name }}", "{{ stop.address }}", "{{ stop.city }}", "{{ stop.state }}", "{{ stop.zip }}", {{ stop.geo }}]{% if not forloop.last %}, {% endif %} 
 		{% endfor %}
 	{% else %}
 		["Trucks are sleeping!", "203 Beale Street", "Memphis", "TN", "38103", 35.139456, -90.051643]
