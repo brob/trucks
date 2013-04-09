@@ -40,9 +40,7 @@ if os.getenv(RUN_ENV, '') == 'production':
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = [
-	'.bryanlrobinson.com',
-]
+ALLOWED_HOSTS = []
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -80,14 +78,14 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = 'http://media.bryanlrobinson.com/media/django-media/static'
+STATIC_ROOT = '/home/bryanlrobinson/webapps/static_port/'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 #STATIC_URL = 'http://media.bryanlrobinson.com/media/django-media/static/'
 if os.getenv(RUN_ENV, '') == 'production':
-	STATIC_URL = 'http://media.bryanlrobinson.com/media/django-media/static/'
+	STATIC_URL = '/static-trucks/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
