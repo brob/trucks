@@ -49,7 +49,7 @@ var stopLatLng = new google.maps.LatLng({{ stop.geo }})
 {% block content %}
 
 <h1>{{ truck.name }}</h1>
-<p>{{ truck.description }}</p>
+<p>{{ truck.description|safe }}</p>
 <p>On Twitter: <a href="http://twitter.com/{{ truck.twitter }}">@{{ truck.twitter }}</a></p>
 
 <h3>Next Stop for {{ truck.name }}</h3>
