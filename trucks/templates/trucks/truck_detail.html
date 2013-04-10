@@ -59,6 +59,7 @@ var stopLatLng = new google.maps.LatLng({{ stop.geo }})
 	<p>{{ stop.arrival|date:"l F d" }} from {{ stop.arrival|date:"P" }} until {{ stop.departure|date:"P" }}</p>
 	<p>{{ stop.address }}<br />
 	{{ stop.city }}, {{ stop.state }} {{ stop.zip }}</p>
+	<p><a href="https://twitter.com/intent/tweet?url={{ site }}{{ truck.get_absolute_url|urlencode }}&text={% if truck.twitter %}@{{ truck.twitter }}{% else %}{{ truck.name }}{% endif %} will be at {{ stop.address }}. I'll be there!" target="blank">Tweet this</a></p>
 	</div>
 	<div id ="map_canvas">
 	
