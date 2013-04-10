@@ -68,7 +68,7 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = False
 if os.getenv(RUN_ENV, '') == 'production':
-	USE_TZ = True
+	USE_TZ = False
 	
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
