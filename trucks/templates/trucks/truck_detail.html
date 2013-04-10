@@ -47,19 +47,17 @@ var stopLatLng = new google.maps.LatLng({{ stop.geo }})
 {% endblock %}
 
 {% block content %}
-{% load cache %}
-{% cache 15 sidebar %}
+
 <h1>{{ truck.name }}</h1>
 <p>{{ truck.description }}</p>
 <p>On Twitter: <a href="http://twitter.com/{{ truck.twitter }}">@{{ truck.twitter }}</a></p>
-{% endcache %}
+
 <h3>Next Stop for {{ truck.name }}</h3>
 
 {% if stop %}
 	<p>{{ stop.arrival|date:"l F d" }} from {{ stop.arrival|date:"P" }} until {{ stop.departure|date:"P" }}</p>
 	<p>{{ stop.address }}<br />
 	{{ stop.city }}, {{ stop.state }} {{ stop.zip }}</p>
-	<p><a href="https://twitter.com/intent/tweet?url={{ site }}{{ truck.get_absolute_url|urlencode }}&text={% if truck.twitter %}@{{ truck.twitter }}{% else %}{{ truck.name }}{% endif %} will be at {{ stop.address }}. I'll be there!" target="blank">Tweet this</a></p>
 	</div>
 	<div id ="map_canvas">
 	

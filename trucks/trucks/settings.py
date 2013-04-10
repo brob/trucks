@@ -110,8 +110,8 @@ SECRET_KEY = 'x(4ph8)un3au+9x-v+&d7hnrv9(#i05_07_387m!ahn1vy_m%m'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-	'django.template.loaders.app_directories.Loader',
     'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
 
@@ -134,7 +134,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	'/home/bryanlrobinson/webapps/custom/trucks/templates',
+	'/home/bryanlrobinson/webapps/custom/trucks/trucks/templates',
 	'/Users/bryanrobinson/documents/personal/trucks/trucks/templates',
 
 )
