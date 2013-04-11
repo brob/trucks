@@ -108,7 +108,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <p>{{ truck.description|safe }}</p>
 <p>On Twitter: <a href="http://twitter.com/{{ truck.twitter }}">@{{ truck.twitter }}</a></p>
 
-<h3>Next Stop for {{ truck.name }}</h3>
+<h3>Most Recent Stop for {{ truck.name }}</h3>
 
 {% if stop %}
 	<p>{{ stop.arrival|date:"l F d" }} from {{ stop.arrival|date:"P" }} until {{ stop.departure|date:"P" }}</p>
