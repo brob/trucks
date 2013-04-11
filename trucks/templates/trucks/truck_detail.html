@@ -32,7 +32,7 @@ function initialize() {
 	};
 	
 	var all = [
-	{% if stops %}
+	{% if stop %}
 		{% for stop in stops %}
 			["{{ stop.truck.name }}", "{{ stop.address }}", "{{ stop.city }}", "{{ stop.state }}", "{{ stop.zip }}", {{ stop.geo }}]{% if not forloop.last %}, {% endif %} 
 		{% endfor %}
