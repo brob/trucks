@@ -33,7 +33,10 @@ def truckDetail(request, slug):
 	nextStop = truck.stop_set.latest(field_name='arrival')
 	departure = nextStop.departure
 	current_time = datetime.datetime.now()
-	stop = nextStop
+	if current_time < departure:
+		stop = nextStop
+	else:
+		stop = None
 
 	return render_to_response("trucks/truck_detail.html", {
 		"test" : "Something",

@@ -31,11 +31,10 @@ function initialize() {
 		scrollwheel: false,
 	};
 	
+
 	var all = [
 	{% if stop %}
-		{% for stop in stops %}
-			["{{ stop.truck.name }}", "{{ stop.address }}", "{{ stop.city }}", "{{ stop.state }}", "{{ stop.zip }}", {{ stop.geo }}]{% if not forloop.last %}, {% endif %} 
-		{% endfor %}
+			["{{ truck.name }}", "{{ stop.address }}", "{{ stop.city }}", "{{ stop.state }}", "{{ stop.zip }}", {{ stop.geo }}]{% if not forloop.last %}, {% endif %} 
 	{% else %}
 		["Trucks are sleeping!", "203 Beale Street", "Memphis", "TN", "38103", 35.139456, -90.051643]
 		
