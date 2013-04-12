@@ -19,19 +19,9 @@
 		{% endblock top_script %}
 		
 		{% block css %}
+		{% load staticfiles %}
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">	
-		
-		<style type="text/css" media="screen">
-			#navSpacer {
-				margin-bottom:40px;
-			}
-			#footer {
-				background:#f9f9f9;
-				margin-top:20px;
-				padding:15px 0 10px;
-			}
-		</style>	
-		
+		<link rel="stylesheet" href="{% static "css/styles.css" %}" type="text/css" media="screen" title="no title" charset="utf-8">		
 		
 		{% endblock css %}
 
@@ -40,8 +30,25 @@
 	</head>
 	
 	<body>
-	
-
+	<div class ="row" id="navigation">
+		<div class ="container">
+			<div class ="span4" id="logo_wrapper">
+				<a href="/" title="Memphis Four Wheel Food" id="logo"></a>
+			</div><!-- end .span5 -->
+			<div class="span4" id="main_location">
+				<h3>Memphis</h3>
+			</div><!-- end .span5 -->
+			<div class ="span4">
+		 		<ul id="nav">
+					<li><a href="/trucks/" title="Listing of all food trucks">Food Trucks</a></li>
+					<li><a href="/contact/" title="Contact Memphis Four Wheel Food">Contact</a></li>
+					
+					
+				</ul>
+			</div><!-- end .span7 -->
+		</div><!-- end .container -->
+	</div><!-- end .row -->
+{% comment %}
 	    <div class="navbar navbar-inverse navbar-fixed-top">
 	      <div class="navbar-inner">
 	        <div class="container">
@@ -64,7 +71,7 @@
 		<div class ="row" id="navSpacer">
 			
 		</div><!-- end .row -->
-	
+{% endcomment %}	
 	<div class ="row">
 		<div class ="container">
 			{% block content %}{% endblock content %}
