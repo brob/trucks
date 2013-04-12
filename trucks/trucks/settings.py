@@ -98,7 +98,7 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.	
 	'/home/bryanlrobinson/webapps/static_port/media/django-media/static',
-	'/home/bryanlrobinson/webapps/static_port/media/django-media/static-trucks/Truck-static-files',
+	'/home/bryanlrobinson/webapps/static_port/static-trucks/Truck-static-files',
 	'/Users/bryanrobinson/documents/personal/static/trucks',
 )
 
