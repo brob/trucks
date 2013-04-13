@@ -4,3 +4,11 @@
 /truckenv/*
 
 *.pyc
+
+trucks/truck/migrations/.DS_Store
+
+*.pyc
+
+trucks/truck/migrations/__init__.pyc
+
+trucks/truck/migrations/0001_initial.py
