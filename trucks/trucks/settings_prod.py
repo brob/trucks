@@ -69,7 +69,7 @@ STATIC_ROOT = '/home/bryanlrobinson/webapps/static_port/static-trucks/'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+STATIC_URL = '/static/static-trucks/'
 
 
 # Additional locations of static files
