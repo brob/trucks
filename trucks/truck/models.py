@@ -9,7 +9,6 @@ class Truck(models.Model):
 	description = models.TextField(blank=True)
 	slug = models.SlugField()
 	twitter = models.CharField(max_length=256, blank=True)
-	logo = models.ImageField(upload_to="uploads/", blank=True, null=True)
 
 	@models.permalink
 	def get_absolute_url(self):
