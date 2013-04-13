@@ -4,3 +4,4 @@
 /truckenv/*
 
 *.pyc
+*/migrations/*
