@@ -4,6 +4,8 @@ from django.template import RequestContext
 from truck.models import *
 from django.core.context_processors import csrf
 from django.core.mail import send_mail
+from django.template import defaultfilters
+import requests, json
 
 
 def home(request):
@@ -43,6 +45,36 @@ def truckDetail(request, slug):
 		'truck' : truck,
 		'stop' : stop,
     }, context_instance=RequestContext(request))
+
+
+
+def getZip(latlng):
+	# grab some lat/long coords from wherever. For this example,
+	# I just opened a javascript console in the browser and ran:
+	#
+	# navigator.geolocation.getCurrentPosition(function(p) {
+	# console.log(p);
+	# })
+	#
+	latLngVar = defaultfilters.cut(latlng, " ")
+
+	# Did the geocoding request comes from a device with a
+	# location sensor? Must be either true or false.
+	sensor = 'true'
+
+	# Hit Google's reverse geocoder directly
+	# NOTE: I *think* their terms state that you're supposed to
+	# use google maps if you use their api for anything.
+	base = "http://maps.googleapis.com/maps/api/geocode/json?"
+	params = "latlng={latlng}&sensor={sen}".format(
+		latlng = latLngVar,
+		sen = "true"
+	)
+	url = "{base}{params}".format(base=base, params=params)
+	response = requests.get(url)
+	jsonObj = json.loads(response.content)
+	fullAddress = jsonObj['results'][0]['formatted_address']
+	return str(fullAddress)
 
 
 def contactForm(request):

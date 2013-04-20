@@ -28,6 +28,7 @@ class Stop(models.Model):
 	city = models.CharField(max_length=500, blank=True)
 	state = models.CharField(max_length=500, blank=True)
 	geo = models.CharField(blank=True, max_length=200, help_text="Takes lat,long data. Leave blank to auto-fill on save.")
+	full_address = models.TextField(blank=True)
 	
 	
 	

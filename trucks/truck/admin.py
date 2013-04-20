@@ -1,5 +1,6 @@
 from django.contrib import admin
 from truck.models import *
+from truck.views import getZip
 from geopy import geocoders
 
 
@@ -18,7 +19,15 @@ class StopAdmin(admin.ModelAdmin):
 			geo = "%.5f, %.5f" % (lat, lng)
 			
 			obj.geo = geo
+			
+		
+
+		obj.save()
+		if not obj.full_address:
+			fullAddress = getZip(obj.geo)
+			obj.full_address = fullAddress
 		obj.save()
 			
+				
 admin.site.register(Truck, TruckAdmin)
 admin.site.register(Stop, StopAdmin)
