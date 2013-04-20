@@ -2,7 +2,7 @@
 /apache2/*
 /htdocs/*
 /truckenv/*
-
+/Truck-Templates/*
 *.pyc
 
 trucks/truck/migrations/.DS_Store
