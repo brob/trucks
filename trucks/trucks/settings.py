@@ -147,8 +147,38 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
 	'truck',
+
+	'allauth',
+	'allauth.account',
+	'allauth.socialaccount',
+	# ... include the providers you want to enable:
+	'allauth.socialaccount.providers.facebook',
+	'allauth.socialaccount.providers.twitter',	
+
 	'south',
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+	"django.contrib.auth.context_processors.auth",
+	"django.core.context_processors.request",
+	"django.core.context_processors.debug",
+	"django.core.context_processors.i18n",
+	"django.core.context_processors.media",
+	"django.core.context_processors.static",
+	"allauth.account.context_processors.account",
+	"allauth.socialaccount.context_processors.socialaccount",
+	"django.core.context_processors.tz",
+	"django.contrib.messages.context_processors.messages",
+)
+AUTHENTICATION_BACKENDS = (
+	# Needed to login by username in Django admin, regardless of `allauth`
+	"django.contrib.auth.backends.ModelBackend",
+
+	# `allauth` specific authentication methods, such as login by e-mail
+	"allauth.account.auth_backends.AuthenticationBackend",
+)
+
+
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'

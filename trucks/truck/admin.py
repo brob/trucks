@@ -27,7 +27,19 @@ class StopAdmin(admin.ModelAdmin):
 			fullAddress = getZip(obj.geo)
 			obj.full_address = fullAddress
 		obj.save()
+
+class CheckinAdmin(admin.ModelAdmin):
+	"""docstring for CheckinAdmin"""
+	list_display = ('user', 'truck', 'datetime')
+	
+	def save_model(self, request, obj, form, change):
+		"""docstring for save_model"""
+		if not obj.full_address:
+			fullAddress = getZip(obj.geo)
+			obj.full_address = fullAddress
+		obj.save()
 			
 				
 admin.site.register(Truck, TruckAdmin)
 admin.site.register(Stop, StopAdmin)
+admin.site.register(checkin, CheckinAdmin)

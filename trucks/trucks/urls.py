@@ -22,6 +22,10 @@ urlpatterns = patterns('',
 	url(r'^trucks/(?P<slug>[-_\w]+)/$', truckDetail),
 	url(r'^contact/$', contactForm),
 	url(r'^thanks/$', TemplateView.as_view(template_name="thanks.html")),
+	url(r'^accounts/', include('allauth.urls')),
+	url(r'^accounts/profile/$', authProfile),
+	url(r'^checkin/$', checkin)
+	
 )
 
 if settings.DEBUG:

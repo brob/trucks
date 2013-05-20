@@ -6,7 +6,7 @@ from django.core.context_processors import csrf
 from django.core.mail import send_mail
 from django.template import defaultfilters
 import requests, json
-
+from django.contrib.auth.decorators import login_required
 
 def home(request):
 	"""docstring for home"""
@@ -39,13 +39,15 @@ def truckDetail(request, slug):
 		stop = nextStop
 	else:
 		stop = None
+		
+	checkins = truck.checkin_set.all
 
 	return render_to_response("trucks/truck_detail.html", {
 		"test" : "Something",
 		'truck' : truck,
 		'stop' : stop,
+		'checkins' : checkins,
     }, context_instance=RequestContext(request))
-
 
 
 def getZip(latlng):
@@ -77,6 +79,50 @@ def getZip(latlng):
 	return str(fullAddress)
 
 
+
+@login_required
+def checkin(request):
+	"""docstring for checkin"""
+	
+
+	if request.method == 'POST':
+		c = {}
+		c.update(csrf(request))
+		form = checkinForm(request.POST)
+		if form.is_valid():
+			form.save()
+			test = "Success"
+		return HttpResponseRedirect('/accounts/profile/')
+		
+	else:
+		c = {}
+		data = {}
+		c.update(csrf(request))
+		currentTruck, geo, fullAddress = "", "", ""
+		query = request.GET
+		if query:		
+			user = request.user
+			currentTruck = request.GET.get("truck","")
+			geo = request.GET.get("lat","") + ", " + request.GET.get("lng","")
+			
+			if not (currentTruck == ""):
+				data['truck'] = Truck.objects.get(name = currentTruck)		
+			if not (geo == ", "):
+				data['geo'] = geo 
+				fullAddress = getZip(geo)
+				data['full_address'] = fullAddress
+			data['user'] = user
+			
+		form = checkinForm(initial=data)
+
+		return render_to_response("checkin.html", {
+			"truck": currentTruck,
+			"geo": geo,
+			"form": form,
+			'c': c
+	    }, context_instance=RequestContext(request))
+
+
 def contactForm(request):
 	if request.method == 'POST':
 		c = {}
@@ -96,4 +142,9 @@ def contactForm(request):
 	return render (request, 'contact.html', {
 		'form': form,
 		'c': c,
+	})
+	
+def authProfile(request):
+	return render (request, 'user/profile.html', {
+		'context': 'Context!',
 	})
