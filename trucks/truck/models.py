@@ -1,7 +1,7 @@
 from django.db import models
 import datetime
 from django import forms
-
+from django.contrib.auth.models import User
 
 class Truck(models.Model):
 	"""docstring for Truck"""
@@ -40,6 +40,22 @@ class Stop(models.Model):
 
 	class Meta:
 		get_latest_by = "arrival"
+
+
+class checkin(models.Model):
+	truck = models.ForeignKey(Truck)
+	geo = models.CharField(blank=True, max_length=200)
+	full_address = models.TextField(blank=True, help_text="Reverse location lookup based on Geo")
+	user = models.ForeignKey(User)
+	datetime = models.DateTimeField(blank=True, default=datetime.datetime.now)
+
+
+class checkinForm(forms.ModelForm):
+	class Meta:
+		model = checkin
+		fields = ("truck", "geo", "user", "datetime", "full_address",)
+
+	
 
 class Contact(forms.Form):
 	name = forms.CharField()
