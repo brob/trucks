@@ -136,6 +136,15 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
 	'truck',
+	'allauth',
+	'allauth.account',
+	'allauth.socialaccount',
+	# ... include the providers you want to enable:
+	'allauth.socialaccount.providers.facebook',
+	'allauth.socialaccount.providers.twitter',	
+	
+	
+	
 	'south',
 )
 
